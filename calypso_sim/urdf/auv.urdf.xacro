@@ -29,12 +29,6 @@
 
     <!-- <xacro:property name="x" default="0"/>
     <xacro:property name="y" default="0"/> -->
-    <xacro:property name="x" default="-0.26"/>
-    <xacro:property name="y" default="0.43"/>
-    <xacro:property name="z" default="0"/>
-    <xacro:property name="r" default="1.57"/>
-    <xacro:property name="p" default="0"/>
-    <xacro:property name="Y" default="0"/>
 
     <xacro:base_link xyz="0 0 0" rpy="0 1.57 0"></xacro:base_link>
 
