@@ -48,9 +48,17 @@
 
                 <gaussianNoise>0</gaussianNoise>
 
+                <updateRate>10.0</updateRate>
+
             </plugin>
 
         </gazebo>
 
     </xacro:macro>
+
+    <!-- <link name="base_link">
+    </link>
+
+    <xacro:imu id="1" parent="base_link" xyz="0 0 0" rpy="0 0 0"></xacro:imu> -->
+    
 </robot>

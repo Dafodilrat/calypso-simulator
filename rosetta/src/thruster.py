@@ -60,14 +60,16 @@ class rosetta :
     coeffs.append(38769.58439545923)
     # [-1.6453836430727448e-05, 0.07440821248059681, -100.45437634228745, 38769.58439545923]
     # print(coeffs)
+    y=0
     if (x>1470 and x<1530):
       y = 0
 
-    else:
+    elif x>=1530 and x<=1900:
       y = x**3*coeffs[0] + x**2*coeffs[1] + x*coeffs[2] + coeffs[3] 
 
-    if (x<1000 or x>2000):
-      y = 0
+    elif (x<1470 and x>1100):
+      y = x**3*coeffs[0] + x**2*coeffs[1] + x*coeffs[2] + coeffs[3]
+      y=-y
     # print(x,y)
     
     return round(round(y, 4)*0.1047198,4)

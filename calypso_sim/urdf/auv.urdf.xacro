@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="auv">
 
-    <xacro:include filename="$(find calypso_sim)/urdf/camera2d.urdf.xacro"/>
-    <xacro:include filename="$(find calypso_sim)/urdf/camera_depth.urdf.xacro"/>
+    <!-- <xacro:include filename="$(find calypso_sim)/urdf/camera2d.urdf.xacro"/> -->
+    <!-- <xacro:include filename="$(find calypso_sim)/urdf/camera_depth.urdf.xacro"/> -->
     <xacro:include filename="$(find calypso_sim)/urdf/imu.urdf.xacro"/>
     <xacro:include filename="$(find calypso_sim)/urdf/thrusters.urdf.xacro"/>
     <xacro:include filename="$(find calypso_sim)/urdf/chasis.urdf.xacro"/>
+    <xacro:include filename="$(find calypso_sim)/urdf/dvl_snippets.urdf.xacro"/>
 
     <material name="red">
         <color rgba="1 0 0 1"/>
@@ -68,8 +69,11 @@
     <xacro:thruster_CCW id="8" parent="base_link" xyz="-0.45 0.2 0" rpy="0 1.57 0.785398" axis="0 0 -1">
     </xacro:thruster_CCW>
 
-    <xacro:imu id="1" parent="base_link" xyz="0 0 0.15" rpy="0 0 -1.57">
-    </xacro:imu>
+    <xacro:default_dvl namespace="calypso_sim" parent_link="base_link">
+      <origin xyz="0 0 -0.18" rpy="0 0 0"/>
+    </xacro:default_dvl>
+
+    <xacro:imu id="1" parent="base_link" xyz="0 0 0" rpy="0 0 0"></xacro:imu>
 
     <gazebo>
       <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
@@ -78,26 +82,27 @@
       </plugin>
     </gazebo>
 
-  <gazebo>
-    <plugin name="freebuoyancy_gazebo" filename="libfreebuoyancy_gazebo.so">
-      <descriptionParam>robot_description</descriptionParam>
-      <alwaysOn>true</alwaysOn>
-      <surface>0 0 40</surface>
-      <updateRate>.001</updateRate>
+    <gazebo>
+      <plugin name="freebuoyancy_gazebo" filename="libfreebuoyancy_gazebo.so">
+        <descriptionParam>/robot_description</descriptionParam>
+        <alwaysOn>true</alwaysOn>
+        <surface>0 0 40</surface>
+        <updateRate>.001</updateRate>
 
-      <link name='base_link'>
-        <buoyancy>
-          <compensation>0.0</compensation>
-          <origin xyz="0 0 0"/>
-        </buoyancy>
-      </link>
-    </plugin>
-  </gazebo>
+        <link name='base_link'>
+          <buoyancy>
+            <compensation>0.0</compensation>
+            <origin xyz="0 0 0"/>
+          </buoyancy>
+        </link>
+      </plugin>
+    </gazebo>
+
   <!-- <gazebo>
     <plugin name="BuoyancyPlugin" filename="libBuoyancyPlugin.so">
-    <fluid_density>1000</fluid_density>
+    <fluid_density>1200</fluid_density>
     <link name="base_link">
-      <volume>0.03</volume>
+      <volume>240</volume>
       <center_of_volume>0 0 0</center_of_volume>
     </link>
   </plugin>

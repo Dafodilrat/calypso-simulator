@@ -1,11 +1,11 @@
 import rospy
-from geometry_msgs.msg import Quaternion
 from sensor_msgs.msg import Imu
 from scipy.integrate import trapezoid
 import time
-from pid_calypso import pid 
 import numpy as np
 from tf.transformations import euler_from_quaternion
+from dvl_msgs.msg import DVL
+from calypso_pose_estimator.msg import pose
 
 class cord:
 
@@ -15,7 +15,8 @@ class cord:
       self.final=0
       self.acc = []
       self.vel = []
-  
+      self.start_time=time.time()
+
   def integrate(self, y, x):
       try:
           return trapezoid(y, x)
@@ -23,11 +24,15 @@ class cord:
           print(len(y),len(x))
           print("Sync failure !!")
   
-  def get_current_pose(self):
+  def get_imu_pose(self):
       
-      vel = round(self.integrate(self.acc,self.time), 2)
-      self.vel.append(vel)
-      return self.integrate(self.vel, self.time)
+    vel = round(self.integrate(self.acc,self.time), 2)
+    self.vel.append(vel)
+    return self.integrate(self.vel, self.time)
+  
+  def get_dvl_pose(self):
+    self.time.append(time.time()-self.start_time)
+    return self.integrate(self.vel, self.time)
 
 
 class pose_estimator:
@@ -38,35 +43,55 @@ class pose_estimator:
 
     self.start_time=time.time()
 
-    self.current_pose=rospy.Publisher("/calypso_sim/pose",Quaternion, queue_size=10)
+    self.current_pose=rospy.Publisher("/calypso_sim/pose",pose, queue_size=10)
 
-    self.x_cord=cord()
-    self.y_cord=cord()
-    self.z_cord=cord()
+    self.current_vellocity=rospy.Publisher("/calypso_sim/velocity",pose, queue_size=10)
+
+    self.pose=pose()
+    self.velocity=pose()
 
     self.rate = rospy.Rate(10) 
 
+    self.dvl_x=cord()
+    self.dvl_y=cord()
+    self.dvl_z=cord()
   
-  def Imu_subscriber(self, Imu):
+  def dvl_subscriber(self,dvl):
+     
+    time_elapsed = time.time() - self.start_time
+    self.dvl_x.vel.append(dvl.velocity.x)
+    self.dvl_y.vel.append(dvl.velocity.y)
+    self.dvl_z.vel.append(dvl.velocity.z)
+    # self.dvl_x.time.append(time_elapsed)
+    # self.dvl_y.time.append(time_elapsed)
+    # self.dvl_y.time.append(time_elapsed)
     
-    time_elapsed = time.time()-self.start_time
-    self.x_cord.time.append(time_elapsed)
-    self.y_cord.time.append(time_elapsed)
-    self.z_cord.time.append(time_elapsed)
-    self.x_cord.acc.append(Imu.linear_acceleration.x)
-    self.y_cord.acc.append(Imu.linear_acceleration.y)
-    self.z_cord.acc.append(round(Imu.linear_acceleration.z, 3))
-    self.pose=Quaternion()
-    self.pose.x=self.x_cord.get_current_pose()
-    self.pose.y=self.y_cord.get_current_pose()
-    self.pose.z=self.z_cord.get_current_pose()
-    x,y,z= np.degrees(euler_from_quaternion([Imu.orientation.x,Imu.orientation.y,Imu.orientation.z,Imu.orientation.w]))
-    print("({},{},{}) ({},{},{})".format(self.pose.x,self.pose.y,self.pose.z,x,y,z))
+    self.velocity.linear_position.x=self.dvl_x.vel[-1]
+    self.velocity.linear_position.y=self.dvl_y.vel[-1]
+    self.velocity.linear_position.z=self.dvl_z.vel[-1]
+    self.pose.linear_position.x=round(self.dvl_x.get_dvl_pose(),3) 
+    self.pose.linear_position.y=round(self.dvl_y.get_dvl_pose(),3) 
+    self.pose.linear_position.z=round(self.dvl_z.get_dvl_pose(),3) 
 
     self.current_pose.publish(self.pose)
-  
+    self.current_vellocity.publish(self.velocity)
+
+  def Imu_subscriber(self, Imu):
+    
+    R,P,Y= np.degrees(euler_from_quaternion([Imu.orientation.x,Imu.orientation.y,Imu.orientation.z,Imu.orientation.w]))
+
+    self.velocity.angular_position.x=round(Imu.angular_velocity.x,3)
+    self.velocity.angular_position.y=round(Imu.angular_velocity.y,3)
+    self.velocity.angular_position.z=round(Imu.angular_velocity.z,3)
+    self.pose.angular_position.x=R
+    self.pose.angular_position.y=P
+    self.pose.angular_position.z=Y
+
   def start(self):
+
+    dvl=rospy.Subscriber("/calypso_sim/dvl",DVL,self.dvl_subscriber)
     imu=rospy.Subscriber("/calypso_sim/imu/data",Imu, self.Imu_subscriber)
+
     rospy.spin()
 
 if __name__ == "__main__":
