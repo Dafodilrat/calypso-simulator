@@ -2,7 +2,8 @@
 
   <include file="$(find calypso_pose_estimator)/launch/pose_estimator.launch" />
   
-  <!-- <node name="dolphins_pid" pkg="calypso_pid_beta" type="pid_dolphins.py"></node> -->
-  <node name="gypseas_pid" pkg="calypso_pid_beta" type="pid_gypseas.py" output="screen"></node>
+  <node name="dolphins_pid" pkg="calypso_pid_beta" type="pid_dolphins.py" output="screen"></node>
+
+  <node name="gypseas_pid" pkg="calypso_pid_beta" type="pid_gypseas.py"></node>
 
 </launch>

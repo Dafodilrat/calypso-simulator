@@ -6,16 +6,18 @@ import numpy as np
 from tf.transformations import euler_from_quaternion
 from dvl_msgs.msg import DVL
 from calypso_pose_estimator.msg import pose
+from scipy.interpolate import interp1d
+from math import atan2
 
 class cord:
 
   def __init__ (self):
     
-      self.time=[]
-      self.final=0
-      self.acc = []
-      self.vel = []
-      self.start_time=time.time()
+    self.time=[]
+    self.final=0
+    self.acc = []
+    self.vel = []
+    self.start_time=time.time()
 
   def integrate(self, y, x):
       try:
@@ -55,6 +57,14 @@ class pose_estimator:
     self.dvl_x=cord()
     self.dvl_y=cord()
     self.dvl_z=cord()
+    self.yaw_interp=interp1d([-179,-1],[181,359])
+  
+  def yaw_readings(self,x):
+
+    if x<0:
+      return self.yaw_interp(x)
+    else :
+      return x
   
   def dvl_subscriber(self,dvl):
      
@@ -83,9 +93,10 @@ class pose_estimator:
     self.velocity.angular_position.x=round(Imu.angular_velocity.x,3)
     self.velocity.angular_position.y=round(Imu.angular_velocity.y,3)
     self.velocity.angular_position.z=round(Imu.angular_velocity.z,3)
+    
     self.pose.angular_position.x=R
     self.pose.angular_position.y=P
-    self.pose.angular_position.z=Y
+    self.pose.angular_position.z=Y#self.yaw_interp(Y)
 
   def start(self):
 

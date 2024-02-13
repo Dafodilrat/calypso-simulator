@@ -25,13 +25,13 @@ class pid_gypseas:
     self.roll.k=[2,0.5,0.05]
     self.heave.k=[11,0.165,8.95]
           
-    self.throttle1 = 1583
-    self.throttle2 = 1583
-    self.throttle3 = 1583
-    self.throttle4 = 1583
+    self.throttle1 = 1582
+    self.throttle2 = 1582
+    self.throttle3 = 1582
+    self.throttle4 = 1582
 
-    self.m = interp1d([0, 90],[1583,2000])
-    self.n = interp1d([-90, 0], [1500,1583])
+    self.m = interp1d([0, 90],[1582,2000])
+    self.n = interp1d([-90, 0], [1500,1582])
 
     self.rate = rospy.Rate(10)
 
@@ -55,7 +55,7 @@ class pid_gypseas:
       PID_heave = self.n(PID_heave_)
     # for testing gyro PID, comment the PID_heave part.
 
-    # self.g=gypseas()
+    # self.g=gypseas()src/calypso-simulator/calypso_pid_beta/scripts/pid_gypseas.py
     # self.g.t1 = round(self.throttle1 + PID_roll - PID_pitch + PID_heave)
     # self.g.t2 = round(self.throttle2 - PID_roll - PID_pitch + PID_heave)
     # self.g.t3 = round(self.throttle3 - PID_roll + PID_pitch + PID_heave)
@@ -85,9 +85,9 @@ class pid_gypseas:
   def get_current_pose(self, pose):
     
     time_elapsed =  time.time()-self.start_time
-    self.pitch.time.append(time_elapsed)
-    self.roll.time.append(time_elapsed)
-    self.heave.time.append(time_elapsed)
+    # self.pitch.time.append(time_elapsed)
+    # self.roll.time.append(time_elapsed)
+    # self.heave.time.append(time_elapsed)
 
     self.heave.current_position = pose.linear_position.z
     self.roll.current_position = pose.angular_position.x

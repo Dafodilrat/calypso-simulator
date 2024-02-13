@@ -1,6 +1,7 @@
 import numpy as np
 from scipy.integrate import trapezoid
 from tf.transformations import euler_from_quaternion
+import time
 
 
 class pid:
@@ -15,8 +16,12 @@ class pid:
         self.current_position=0
         self.current_velocity=0
         self.final_position=0
+        self.start_time=time.time()
     
     def integrate(self, y, x):
+
+        self.time.append(time.time() - self.start_time)
+
         try:
             return trapezoid(y, x)
         except Exception as e:

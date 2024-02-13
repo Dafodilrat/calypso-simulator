@@ -7,7 +7,7 @@ def publish_pose():
 
     pose.x=3
     pose.y=3
-    pose.z=3
+    pose.z=1
     pose.w=0
     posepub.publish(pose)
 

@@ -67,12 +67,12 @@
 
           <alwaysOn>true</alwaysOn>
           <!-- <updateRate>0.0</updateRate> -->
-          <cameraName>calypso_sim/camera_front</cameraName>
-          <imageTopicName>/yash_cam/image_raw</imageTopicName>
+          <cameraName>calypso_sim/depth_camera</cameraName>
+          <imageTopicName>image</imageTopicName>
           <!-- <cameraInfoTopicName>camera_info</cameraInfoTopicName> -->
-          <depthImageTopicName>image_raw</depthImageTopicName>
+          <depthImageTopicName>depth_image</depthImageTopicName>
           <depthImageCameraInfoTopicName>camera_info</depthImageCameraInfoTopicName>
-          <pointCloudTopicName>points</pointCloudTopicName>
+          <pointCloudTopicName>3dpoints</pointCloudTopicName>
           <!-- <frameName>camera_link</frameName> -->
           <pointCloudCutoff>0.5</pointCloudCutoff>
           <pointCloudCutoffMax>3.0</pointCloudCutoffMax>
