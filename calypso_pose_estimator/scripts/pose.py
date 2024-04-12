@@ -45,9 +45,9 @@ class pose_estimator:
 
     self.start_time=time.time()
 
-    self.current_pose=rospy.Publisher("/calypso_sim/pose",pose, queue_size=10)
+    self.current_pose=rospy.Publisher("/calypso_sim/pose",pose, queue_size=2)
 
-    self.current_vellocity=rospy.Publisher("/calypso_sim/velocity",pose, queue_size=10)
+    self.current_vellocity=rospy.Publisher("/calypso_sim/velocity",pose, queue_size=2)
 
     self.pose=pose()
     self.velocity=pose()
@@ -69,9 +69,9 @@ class pose_estimator:
   def dvl_subscriber(self,dvl):
      
     time_elapsed = time.time() - self.start_time
-    self.dvl_x.vel.append(dvl.velocity.x)
-    self.dvl_y.vel.append(dvl.velocity.y)
-    self.dvl_z.vel.append(dvl.velocity.z)
+    self.dvl_x.vel.append(round(dvl.velocity.x,4))
+    self.dvl_y.vel.append(round(dvl.velocity.y,4))
+    self.dvl_z.vel.append(round(dvl.velocity.z,4))
     # self.dvl_x.time.append(time_elapsed)
     # self.dvl_y.time.append(time_elapsed)
     # self.dvl_y.time.append(time_elapsed)

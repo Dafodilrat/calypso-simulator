@@ -23,7 +23,7 @@ class pid_gypseas:
 
     self.pitch.k=[2,0.5,0.05]
     self.roll.k=[2,0.5,0.05]
-    self.heave.k=[11,0.165,8.95]
+    self.heave.k=[5,0.165,8.95]
           
     self.throttle1 = 1582
     self.throttle2 = 1582

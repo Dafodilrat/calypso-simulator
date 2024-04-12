@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="camera">
   
-<!-- this is for the 2d camera in the bottom -->
+<!-- this is for the 2d camera in the front -->
   <xacro:macro name="camera2d" params="id parent xyz rpy">
 
-    <link name="camera_bottom">
+    <link name="camera_front">
       <visual>
         <geometry>
           <box size="0.05 0.05 0.05"/>
@@ -23,23 +23,23 @@
       </inertial> -->
     </link>
 
-    <link name="camera_link_optical_bottom"></link>
+    <link name="camera_link_optical_front"></link>
 
-    <joint name="base_link_to_camera_bottom_joint" type="fixed">
+    <joint name="base_link_to_camera_front_joint" type="fixed">
       <parent link="${parent}"/>
-      <child link="camera_bottom"/>
+      <child link="camera_front"/>
       <origin xyz="${xyz}" rpy="${rpy}"/>
     </joint>
 
-    <joint name="camera_optical_joint_bottom" type="fixed">
-      <parent link="camera_bottom"/>
-      <child link="camera_link_optical_bottom"/>
+    <joint name="camera_optical_joint_front" type="fixed">
+      <parent link="camera_front"/>
+      <child link="camera_link_optical_front"/>
       <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
     </joint>
 
     
 
-    <gazebo reference="camera_bottom">
+    <gazebo reference="camera_front">
       <material>Gazebo/Red</material>
 
       <sensor name="camera" type="camera">
@@ -59,8 +59,8 @@
           </clip>
         </camera>
         <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-          <frame_name>camera_link_optical_bottom</frame_name>
-          <cameraName>calypso_sim/camera_bottom</cameraName>
+          <frame_name>camera_link_optical_front</frame_name>
+          <cameraName>calypso_sim/camera_front</cameraName>
           <imageTopicName>image_raw</imageTopicName>
         </plugin>
       </sensor>

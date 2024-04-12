@@ -5,9 +5,9 @@ def publish_pose():
   
     pose=Quaternion()
 
-    pose.x=3
-    pose.y=3
-    pose.z=1
+    pose.x=6
+    pose.y=6
+    pose.z=6
     pose.w=0
     posepub.publish(pose)
 

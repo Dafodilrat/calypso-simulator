@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="auv">
 
-    <xacro:include filename="$(find calypso_sim)/urdf/camera2d.urdf.xacro"/>
-    <!-- <xacro:include filename="$(find calypso_sim)/urdf/camera_depth.urdf.xacro"/> -->
+    <!-- <xacro:include filename="$(find calypso_sim)/urdf/camera2d.urdf.xacro"/> -->
+    <xacro:include filename="$(find calypso_sim)/urdf/camera_depth.urdf.xacro"/>
     <xacro:include filename="$(find calypso_sim)/urdf/imu.urdf.xacro"/>
     <xacro:include filename="$(find calypso_sim)/urdf/thrusters.urdf.xacro"/>
     <xacro:include filename="$(find calypso_sim)/urdf/chasis.urdf.xacro"/>
@@ -75,7 +75,7 @@
 
     <xacro:imu id="1" parent="base_link" xyz="0 0 0" rpy="0 0 0"></xacro:imu>
 
-    <xacro:camera2d id="1" parent="base_link" xyz="0 0.3 0" rpy="0 0 0"></xacro:camera2d>
+    <xacro:depth_cam id="1" parent="base_link" xyz="0.3 0 0" rpy="0 0 0"></xacro:depth_cam>
 
     <gazebo>
       <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">

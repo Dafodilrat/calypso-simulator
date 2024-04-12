@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <launch>
 
+  <!-- <include file="$(find calypso_sim)/launch/herkules.launch" /> -->
   <include file="$(find calypso_sim)/launch/blue.launch" />
   <include file="$(find calypso_sim)/launch/spawn.launch" />
-  <!-- <include file="${find calypso_pose_estimator}/launch/pose_estimator.launch"/> -->
   <!-- <include file="$(find calypso_pid_beta)/launch/pid.launch" /> -->
 
 </launch>

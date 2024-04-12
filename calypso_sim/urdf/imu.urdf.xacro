@@ -28,7 +28,7 @@
             </inertial>
         </link>
 
-=       <gazebo>
+       <gazebo>
 
             <plugin name="gazebo_ros_imu_${id}_controller" filename="libgazebo_ros_imu.so">
 
