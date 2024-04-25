@@ -1,3 +1,4 @@
+#!/bin/env python3
 import rospy
 from geometry_msgs.msg import Quaternion
 
@@ -6,7 +7,7 @@ def publish_pose():
     pose=Quaternion()
 
     pose.x=6
-    pose.y=6
+    pose.y=0
     pose.z=6
     pose.w=0
     posepub.publish(pose)

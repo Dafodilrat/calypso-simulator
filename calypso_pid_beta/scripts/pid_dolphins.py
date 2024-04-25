@@ -22,8 +22,8 @@ class pid_dolphins:
     self.sway=PID()
 
     self.yaw.k=[5,0.5,0.05]
-    self.surge.k=[1,0.05,0.05]
-    self.sway.k=[1,0.05,0.05]
+    self.surge.k=[1,0,0]
+    self.sway.k=[1,0,0]
 
     self.dolphins_interp = interp1d([-270,270],[1525,1800])
     self.yaw_interp= interp1d([-179,-1],[181,359])
@@ -46,13 +46,18 @@ class pid_dolphins:
     thruster_2=(self.base_thrust-pid_yaw-pid_surge-pid_sway)
     thruster_3=(self.base_thrust+pid_yaw+pid_surge-pid_sway)
     thruster_4=(self.base_thrust-pid_yaw+pid_surge+pid_sway)
+
+    # thruster_1=self.dolphins_interp(+pid_yaw-pid_surge+pid_sway)
+    # thruster_2=self.dolphins_interp(-pid_yaw-pid_surge-pid_sway)
+    # thruster_3=self.dolphins_interp(+pid_yaw+pid_surge-pid_sway)
+    # thruster_4=self.dolphins_interp(-pid_yaw+pid_surge+pid_sway)
     
     d=dolphins()
 
-    d.d1=round(thruster_1)
-    d.d2=round(thruster_2)
-    d.d3=round(thruster_3)
-    d.d4=round(thruster_4) 
+    d.d1=int(thruster_1)
+    d.d2=int(thruster_2)
+    d.d3=int(thruster_3)
+    d.d4=int(thruster_4) 
     
     print("current_y :{} current_x:{}".format(self.sway.current_position,self.surge.current_position))
     print("final_y :{} final_x:{}".format(self.sway.final_position,self.surge.final_position))

@@ -45,7 +45,7 @@ class pose_estimator:
 
     self.start_time=time.time()
 
-    self.current_pose=rospy.Publisher("/calypso_sim/pose",pose, queue_size=2)
+    self.current_pose=rospy.Publisher("/calypso_sim/pose",pose, queue_size=10)
 
     self.current_vellocity=rospy.Publisher("/calypso_sim/velocity",pose, queue_size=2)
 

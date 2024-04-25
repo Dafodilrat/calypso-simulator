@@ -23,14 +23,15 @@ class pid_gypseas:
 
     self.pitch.k=[2,0.5,0.05]
     self.roll.k=[2,0.5,0.05]
-    self.heave.k=[5,0.165,8.95]
+    # [100,0.165,800]
+    self.heave.k=[10,0,1]
           
     self.throttle1 = 1582
     self.throttle2 = 1582
     self.throttle3 = 1582
     self.throttle4 = 1582
 
-    self.m = interp1d([0, 90],[1582,2000])
+    self.m = interp1d([0, 90],[1582,1900])
     self.n = interp1d([-90, 0], [1500,1582])
 
     self.rate = rospy.Rate(10)
