@@ -7,6 +7,7 @@
   <node name="controller" pkg="calypso_teleop_joy" type="xbox_controller.py">
   </node>
 
+  <!-- <rosparam command="set" param="joy_node/dev">"/dev/input/js0"</rosparam> -->
   <!-- <node pkg="aliencontrol" type="aliencontrol" name="aliencontrol">
     <param name="cmd" value="$(find calypso_controller)/scripts/controller.sh"/>
   </node> -->

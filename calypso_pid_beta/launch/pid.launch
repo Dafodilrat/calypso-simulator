@@ -1,6 +1,6 @@
 <launch>
 
-  <include file="$(find calypso_pose_estimator)/launch/pose_estimator.launch" />
+  <!-- <include file="$(find calypso_pose_estimator)/launch/pose_estimator.launch" /> -->
   
   <node name="dolphins_pid" pkg="calypso_pid_beta" type="pid_dolphins.py" output="screen"></node>
 
