@@ -2,13 +2,11 @@
 
 **Calypso-Sim** is an open-source ROS and Gazebo-based simulator for autonomous underwater vehicles (AUVs). It provides a comprehensive, modular, and customizable platform for developing, testing, and validating underwater robotics software — all without needing real-world sea trials.
 
-![Simulator Environment](images/page_75_img_1.jpeg)
+![Simulator Environment](images/page_75_img_1.jpeg) ![Simulator setup](images/page_77_img_1.jpeg)
 
-![Simulator setup](images/page_77_img_1.jpeg)
+![Depth camera 3d](images/page_77_img_2.jpeg) ![Depth camera 3d](images/page_78_img_1.jpeg)
 
-![Depth camera 3d](images/page_77_img_2.jpeg)
 
-![Depth camera 3d](images/page_78_img_1.jpeg)
 
 ## 🌊 Key Features
 
