@@ -2,6 +2,14 @@
 
 **Calypso-Sim** is an open-source ROS and Gazebo-based simulator for autonomous underwater vehicles (AUVs). It provides a comprehensive, modular, and customizable platform for developing, testing, and validating underwater robotics software — all without needing real-world sea trials.
 
+![Simulator Environment](images/page_75_img_1.jpeg)
+
+![Simulator setup](images/page_77_img_1.jpeg)
+
+![Depth camera 3d](images/page_77_img_2.jpeg)
+
+![Depth camera 3d](images/page_78_img_1.jpeg)
+
 ## 🌊 Key Features
 
 - **Full ROS Integration**: Custom thruster control messages and topic structure.
@@ -13,31 +21,31 @@
 
 ## 🧭 Architecture Overview
 
-![Software Architecture](images/page_27_img_1.jpeg)
+![Software Architecture](images/page_31_img_2.jpeg)
 *High-level architecture of Calypso-Sim showing sensor, control, and localization modules.*
 
 ---
 
 ## 🔧 Thruster Control System
 
-![Thruster Pipeline](images/page_30_img_1.jpeg)
+![Thruster Pipeline](images/page_34_img_1.jpeg)
 *Thruster pipeline from PWM input to Gazebo RPM control.*
 
-![RPM vs PWM](images/page_30_img_2.jpeg)
+![RPM vs PWM](images/page_34_img_2.jpeg)
 *Mapping between PWM and RPM using BlueRobotics T200 profile.*
 
 ---
 
 ## 🔄 Thruster Configuration
 
-![Thruster Configuration](images/page_34_img_1.jpeg)
+![Thruster Configuration](images/page_37_img_1.jpeg)
 *8-thruster layout enabling 6-DOF control for the AUV.*
 
 ---
 
 ## 🔌 ROS Communication Architecture
 
-![ROS Architecture](images/page_35_img_1.jpeg)
+![ROS Architecture](images/page_38_img_1.jpeg)
 *ROS topic graph for Calypso-Sim communication across control, sensors, and actuation.*
 
 
