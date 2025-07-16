@@ -10,6 +10,37 @@
 - **Teleoperation**: Manual control using game controllers via rosserial.
 - **Modular Design**: Easy to test individual components or swap control logic.
 
+
+## 🧭 Architecture Overview
+
+![Software Architecture](images/page_27_img_1.jpeg)
+*High-level architecture of Calypso-Sim showing sensor, control, and localization modules.*
+
+---
+
+## 🔧 Thruster Control System
+
+![Thruster Pipeline](images/page_30_img_1.jpeg)
+*Thruster pipeline from PWM input to Gazebo RPM control.*
+
+![RPM vs PWM](images/page_30_img_2.jpeg)
+*Mapping between PWM and RPM using BlueRobotics T200 profile.*
+
+---
+
+## 🔄 Thruster Configuration
+
+![Thruster Configuration](images/page_34_img_1.jpeg)
+*8-thruster layout enabling 6-DOF control for the AUV.*
+
+---
+
+## 🔌 ROS Communication Architecture
+
+![ROS Architecture](images/page_35_img_1.jpeg)
+*ROS topic graph for Calypso-Sim communication across control, sensors, and actuation.*
+
+
 ## 📦 Repository Structure
 
 ```
